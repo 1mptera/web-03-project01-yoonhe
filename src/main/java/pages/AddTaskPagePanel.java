@@ -1,4 +1,7 @@
+package pages;
+
 import models.Task;
+import panels.TasksPanel;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -15,9 +18,9 @@ public class AddTaskPagePanel extends JPanel {
     private List<Task> tasks;
 
     private CardLayout pages;
+    private TasksPanel tasksPanel;
     private JPanel contentPanel;
     private JPanel headPanel;
-    private TasksPanel tasksPanel;
     private JTextField textField;
 
     public AddTaskPagePanel(CardLayout pages, JPanel contentPanel) {
@@ -49,7 +52,7 @@ public class AddTaskPagePanel extends JPanel {
         tasks = new ArrayList<>();
 
         tasksPanel = new TasksPanel(tasks);
-        
+
         this.add(tasksPanel);
     }
 

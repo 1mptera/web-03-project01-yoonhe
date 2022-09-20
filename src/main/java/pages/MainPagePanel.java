@@ -1,4 +1,7 @@
+package pages;
+
 import models.Objective;
+import panels.Big3Panel;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -16,7 +19,7 @@ public class MainPagePanel extends JPanel {
         this.pages = pages;
         this.contentPanel = contentPanel;
 
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setLayout(new BorderLayout());
 
         initBig3Panel();
         initButtonPanel();
@@ -25,7 +28,7 @@ public class MainPagePanel extends JPanel {
     private void initBig3Panel() {
         List<Objective> objectives = loadObjectives();
 
-        this.add(new Big3Panel(objectives), BorderLayout.PAGE_START);
+        this.add(new Big3Panel(objectives));
     }
 
 
@@ -40,7 +43,7 @@ public class MainPagePanel extends JPanel {
     public void initButtonPanel() {
         buttonPanel = new JPanel();
 
-        this.add(buttonPanel);
+        this.add(buttonPanel, BorderLayout.PAGE_END);
 
         createStartButton();
     }
