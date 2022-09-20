@@ -1,3 +1,5 @@
+import models.Pomodoro;
+
 import pages.AddTaskPagePanel;
 import pages.PomodoroQuantityPage;
 import pages.MainPagePanel;
@@ -7,14 +9,14 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.CardLayout;
 
-public class Pomodoro {
+public class PomodoroChecker {
     private JFrame frame;
     private JPanel contentPanel;
 
     private CardLayout pages;
 
     public static void main(String[] args) {
-        Pomodoro application = new Pomodoro();
+        PomodoroChecker application = new PomodoroChecker();
         application.run();
     }
 
@@ -46,11 +48,13 @@ public class Pomodoro {
     }
 
     public void setPages() {
+        Pomodoro pomodoro = new Pomodoro();
+
         contentPanel.add("MainPage",
-                new MainPagePanel(pages, contentPanel));
+                new MainPagePanel(pages, contentPanel, pomodoro));
         contentPanel.add("AddTaskPage",
-                new AddTaskPagePanel(pages, contentPanel));
+                new AddTaskPagePanel(pages, contentPanel, pomodoro));
         contentPanel.add("pages.PomodoroQuantityPage",
-                new PomodoroQuantityPage(pages, contentPanel));
+                new PomodoroQuantityPage(pages, contentPanel, pomodoro));
     }
 }

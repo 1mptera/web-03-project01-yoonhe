@@ -1,5 +1,6 @@
 package pages;
 
+import models.Pomodoro;
 import models.Task;
 import panels.TasksPanel;
 
@@ -20,12 +21,14 @@ public class AddTaskPagePanel extends JPanel {
     private CardLayout pages;
     private TasksPanel tasksPanel;
     private JPanel contentPanel;
+    private Pomodoro pomodoro;
     private JPanel headPanel;
     private JTextField textField;
 
-    public AddTaskPagePanel(CardLayout pages, JPanel contentPanel) {
+    public AddTaskPagePanel(CardLayout pages, JPanel contentPanel, Pomodoro pomodoro) {
         this.pages = pages;
         this.contentPanel = contentPanel;
+        this.pomodoro = pomodoro;
 
         this.setLayout(new BorderLayout());
 
@@ -49,7 +52,7 @@ public class AddTaskPagePanel extends JPanel {
     }
 
     private void createTasksPanel() {
-        tasks = new ArrayList<>();
+        tasks = pomodoro.getTasks();
 
         tasksPanel = new TasksPanel(tasks);
 
@@ -68,7 +71,7 @@ public class AddTaskPagePanel extends JPanel {
         button.addActionListener(event -> {
             String text = textField.getText();
 
-            tasks.add(new Task(text, false));
+            pomodoro.addTasks(new Task(text, false));
 
             cleatTextField();
 
