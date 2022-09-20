@@ -1,3 +1,7 @@
+import pages.AddTaskPagePanel;
+import pages.PomodoroQuantityPage;
+import pages.MainPagePanel;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -44,7 +48,9 @@ public class Pomodoro {
     public void setPages() {
         contentPanel.add("MainPage",
                 new MainPagePanel(pages, contentPanel));
-        contentPanel.add("CreateTaskPage",
+        contentPanel.add("AddTaskPage",
                 new AddTaskPagePanel(pages, contentPanel));
+        contentPanel.add("pages.PomodoroQuantityPage",
+                new PomodoroQuantityPage(pages, contentPanel));
     }
 }

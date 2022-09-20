@@ -1,3 +1,5 @@
+package panels;
+
 import models.Objective;
 
 import javax.swing.BoxLayout;
@@ -22,7 +24,7 @@ public class Big3Panel extends JPanel {
 
         title.setBorder(new EmptyBorder(0, 0, 20, 0));
 
-        for(Objective objective: objectives) {
+        for (Objective objective : objectives) {
             JLabel label = new JLabel(objective.toString());
             label.setBorder(new EmptyBorder(0, 0, 5, 0));
 
