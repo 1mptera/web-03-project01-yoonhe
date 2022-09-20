@@ -2,7 +2,6 @@ import models.Task;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
-import javax.swing.BoxLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
@@ -16,17 +15,12 @@ public class AddTaskPagePanel extends JPanel {
     private List<Task> tasks;
 
     private CardLayout pages;
-
     private JPanel contentPanel;
     private JPanel headPanel;
-    private JPanel tasksPanel;
-    private JPanel buttonsPanel;
-
+    private TasksPanel tasksPanel;
     private JTextField textField;
 
     public AddTaskPagePanel(CardLayout pages, JPanel contentPanel) {
-        tasks = new ArrayList<>();
-
         this.pages = pages;
         this.contentPanel = contentPanel;
 
@@ -36,12 +30,13 @@ public class AddTaskPagePanel extends JPanel {
 
         createTasksPanel();
 
-        createButtonsPanel();
+        createPaginationPanel(pages, contentPanel);
     }
 
-    private void createInputFieldPanel() {
+    public void createInputFieldPanel() {
         headPanel = new JPanel();
         this.add(headPanel, BorderLayout.PAGE_START);
+
         headPanel.add(new JLabel("할 일 추가"));
 
         textField = new JTextField(15);
@@ -50,7 +45,22 @@ public class AddTaskPagePanel extends JPanel {
         createAddButton();
     }
 
-    private void createAddButton() {
+    private void createTasksPanel() {
+        tasks = new ArrayList<>();
+
+        tasksPanel = new TasksPanel(tasks);
+        
+        this.add(tasksPanel);
+    }
+
+    private void createPaginationPanel(CardLayout pages, JPanel contentPanel) {
+        this.add(
+                new PaginationPanel(pages, contentPanel),
+                BorderLayout.PAGE_END
+        );
+    }
+
+    public void createAddButton() {
         JButton button = new JButton("추가");
         button.addActionListener(event -> {
             String text = textField.getText();
@@ -59,59 +69,12 @@ public class AddTaskPagePanel extends JPanel {
 
             cleatTextField();
 
-            updateTasksPanel();
+            tasksPanel.update();
         });
         headPanel.add(button);
     }
 
-    private void cleatTextField() {
+    public void cleatTextField() {
         textField.setText("");
-    }
-
-    public void createTasksPanel() {
-        tasksPanel = new JPanel();
-        tasksPanel.setLayout(new BoxLayout(tasksPanel, BoxLayout.Y_AXIS));
-        this.add(tasksPanel);
-
-        displayTasks();
-    }
-
-    public void updateTasksPanel() {
-        tasksPanel.removeAll();
-
-        displayTasks();
-
-        tasksPanel.setVisible(false);
-        tasksPanel.setVisible(true);
-    }
-
-    private void displayTasks() {
-        for (Task task : tasks) {
-            tasksPanel.add(new TaskPanel(task));
-        }
-    }
-
-    public void createButtonsPanel() {
-        buttonsPanel = new JPanel();
-        this.add(buttonsPanel, BorderLayout.PAGE_END);
-
-        buttonsPanel.add(createPreviousButton(pages));
-        buttonsPanel.add(createNextButton());
-    }
-
-    private JButton createNextButton() {
-        JButton button = new JButton("다음");
-        button.addActionListener(event -> {
-
-        });
-        return button;
-    }
-
-    private JButton createPreviousButton(CardLayout pages) {
-        JButton button = new JButton("이전");
-        button.addActionListener(event -> {
-            pages.previous(contentPanel);
-        });
-        return button;
     }
 }

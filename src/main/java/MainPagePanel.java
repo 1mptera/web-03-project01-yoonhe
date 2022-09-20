@@ -48,7 +48,7 @@ public class MainPagePanel extends JPanel {
     public void createStartButton() {
         JButton button = new JButton("시작하기");
         button.addActionListener(event -> {
-            pages.show(contentPanel, "CreateTaskPage");
+            pages.show(contentPanel, "AddTaskPage");
         });
         buttonPanel.add(button);
     }

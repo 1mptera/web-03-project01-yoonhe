@@ -44,7 +44,9 @@ public class Pomodoro {
     public void setPages() {
         contentPanel.add("MainPage",
                 new MainPagePanel(pages, contentPanel));
-        contentPanel.add("CreateTaskPage",
+        contentPanel.add("AddTaskPage",
                 new AddTaskPagePanel(pages, contentPanel));
+        contentPanel.add("PomodoroQuantityPage",
+                new PomodoroQuantityPage(pages, contentPanel));
     }
 }

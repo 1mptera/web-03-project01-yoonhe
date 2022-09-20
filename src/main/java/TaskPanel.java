@@ -10,11 +10,13 @@ public class TaskPanel extends JPanel {
 
     private JPanel taskTitlePanel;
     private JPanel taskFieldPanel;
+    private TasksPanel tasksPanel;
 
     private JTextField textField;
 
-    public TaskPanel(Task task) {
+    public TaskPanel(Task task, TasksPanel tasksPanel) {
         this.task = task;
+        this.tasksPanel = tasksPanel;
 
         createTaskTitlePanel();
         createTaskFieldPanel();
@@ -41,7 +43,15 @@ public class TaskPanel extends JPanel {
         taskTitlePanel.add(new JLabel("- " + task.getTitle()));
 
         taskTitlePanel.add(createEditButton());
-        taskTitlePanel.add(new JButton("삭제"));
+        taskTitlePanel.add(createDeleteButton());
+    }
+
+    private JButton createDeleteButton() {
+        JButton button = new JButton("삭제");
+        button.addActionListener(event -> {
+            tasksPanel.deleteTasks(task);
+        });
+        return button;
     }
 
     private JButton createEditButton() {
