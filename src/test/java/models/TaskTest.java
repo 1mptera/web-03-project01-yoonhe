@@ -16,4 +16,13 @@ class TaskTest {
 
         assertEquals("강의 반복 과제", task.getTitle());
     }
+
+    @Test
+    void editTitle() {
+        Task task = new Task("강의 반복 과제", false);
+
+        task.editTitle("수정 강의 반복 과제");
+
+        assertEquals("수정 강의 반복 과제", task.getTitle());
+    }
 }

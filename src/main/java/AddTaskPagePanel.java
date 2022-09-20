@@ -44,7 +44,7 @@ public class AddTaskPagePanel extends JPanel {
         this.add(headPanel, BorderLayout.PAGE_START);
         headPanel.add(new JLabel("할 일 추가"));
 
-        textField = new JTextField(10);
+        textField = new JTextField(15);
         headPanel.add(textField);
 
         createAddButton();
