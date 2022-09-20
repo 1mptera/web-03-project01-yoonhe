@@ -12,17 +12,19 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class AddTaskPagePanel extends JPanel {
+    private Pomodoro pomodoro;
+
     private List<Task> tasks;
 
     private CardLayout pages;
-    private TasksPanel tasksPanel;
+
     private JPanel contentPanel;
-    private Pomodoro pomodoro;
     private JPanel headPanel;
+    private TasksPanel tasksPanel;
+    
     private JTextField textField;
 
     public AddTaskPagePanel(CardLayout pages, JPanel contentPanel, Pomodoro pomodoro) {

@@ -13,9 +13,10 @@ import java.util.List;
 public class MainPagePanel extends JPanel {
     private Pomodoro pomodoro;
 
-    private JPanel buttonPanel;
     private CardLayout pages;
+    
     private JPanel contentPanel;
+    private JPanel buttonPanel;
 
     private List<Objective> objectives;
 
