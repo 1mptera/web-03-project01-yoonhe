@@ -1,18 +1,20 @@
 import models.Task;
 
 import java.awt.BorderLayout;
-import javax.swing.BoxLayout;
 import java.awt.CardLayout;
+import javax.swing.BoxLayout;
 
 import javax.swing.JPanel;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 
 public class AddTaskPagePanel extends JPanel {
+    private List<Task> tasks;
+
     private CardLayout pages;
 
     private JPanel contentPanel;
@@ -23,6 +25,8 @@ public class AddTaskPagePanel extends JPanel {
     private JTextField textField;
 
     public AddTaskPagePanel(CardLayout pages, JPanel contentPanel) {
+        tasks = new ArrayList<>();
+
         this.pages = pages;
         this.contentPanel = contentPanel;
 
@@ -49,21 +53,39 @@ public class AddTaskPagePanel extends JPanel {
     private void createAddButton() {
         JButton button = new JButton("추가");
         button.addActionListener(event -> {
+            String text = textField.getText();
 
+            tasks.add(new Task(text, false));
+
+            cleatTextField();
+
+            updateTasksPanel();
         });
         headPanel.add(button);
     }
 
-    public void createTasksPanel() {
-        List<Task> tasks = new ArrayList<>();
+    private void cleatTextField() {
+        textField.setText("");
+    }
 
+    public void createTasksPanel() {
         tasksPanel = new JPanel();
+        tasksPanel.setLayout(new BoxLayout(tasksPanel, BoxLayout.Y_AXIS));
         this.add(tasksPanel);
 
-        tasks.add(new Task("강의 반복 과제", false));
-        tasks.add(new Task("강의 반복 과제", false));
-        tasks.add(new Task("강의 반복 과제", false));
+        displayTasks();
+    }
 
+    public void updateTasksPanel() {
+        tasksPanel.removeAll();
+
+        displayTasks();
+
+        tasksPanel.setVisible(false);
+        tasksPanel.setVisible(true);
+    }
+
+    private void displayTasks() {
         for (Task task : tasks) {
             tasksPanel.add(new TaskPanel(task));
         }
