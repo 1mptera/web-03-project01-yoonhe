@@ -20,12 +20,16 @@ public class TaskPanel extends JPanel {
         this.task = task;
         this.tasksPanel = tasksPanel;
 
+        this.setOpaque(false);
+
         createTaskTitlePanel();
         createTaskFieldPanel();
     }
 
     public void createTaskTitlePanel() {
         taskTitlePanel = new JPanel();
+
+        taskTitlePanel.setOpaque(false);
 
         this.add(taskTitlePanel);
 
@@ -42,7 +46,8 @@ public class TaskPanel extends JPanel {
     }
 
     private void displayTaskTitle() {
-        taskTitlePanel.add(new JLabel("- " + task.getTitle()));
+        JLabel label = new JLabel("- " + task.getTitle());
+        taskTitlePanel.add(label);
 
         taskTitlePanel.add(createEditButton());
         taskTitlePanel.add(createDeleteButton());
@@ -75,7 +80,7 @@ public class TaskPanel extends JPanel {
         taskFieldPanel = new JPanel();
         this.add(taskFieldPanel);
 
-        textField = new JTextField(15);
+        textField = new JTextField(10);
         taskFieldPanel.add(textField);
 
         taskFieldPanel.add(createConfirmButton());

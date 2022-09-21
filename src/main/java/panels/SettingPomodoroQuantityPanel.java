@@ -1,4 +1,4 @@
-package pages;
+package panels;
 
 import models.Pomodoro;
 
@@ -6,35 +6,30 @@ import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
-import java.awt.CardLayout;
 
-public class PomodoroQuantityPage extends JPanel {
-    private CardLayout pages;
-    private JPanel contentPanel;
+public class SettingPomodoroQuantityPanel extends JPanel {
     private Pomodoro pomodoro;
     private JPanel comboBoxPanel;
 
-    public PomodoroQuantityPage(
-            CardLayout pages,
-            JPanel contentPanel,
+    public SettingPomodoroQuantityPanel(
             Pomodoro pomodoro
     ) {
-        this.pages = pages;
-        this.contentPanel = contentPanel;
         this.pomodoro = pomodoro;
+
+        this.setOpaque(false);
 
         this.setLayout(new BorderLayout());
 
         createTitlePanel();
 
         createDropBox();
-
-        createPaginationPanel(pages, contentPanel);
     }
 
     private void createDropBox() {
         comboBoxPanel = new JPanel();
         this.add(comboBoxPanel);
+
+        comboBoxPanel.setOpaque(false);
 
         JComboBox comboBox = new JComboBox();
 
@@ -53,11 +48,8 @@ public class PomodoroQuantityPage extends JPanel {
         JPanel titlePanel = new JPanel();
 
         titlePanel.add(new JLabel("뽀모도로 수량 설정"));
+        titlePanel.setOpaque(false);
 
         this.add(titlePanel, BorderLayout.PAGE_START);
-    }
-
-    private void createPaginationPanel(CardLayout pages, JPanel contentPanel) {
-        this.add(new PaginationPanel(pages, contentPanel), BorderLayout.PAGE_END);
     }
 }

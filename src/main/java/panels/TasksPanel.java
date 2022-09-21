@@ -13,6 +13,8 @@ public class TasksPanel extends JPanel {
 
     public TasksPanel(List<Task> tasks) {
         this.tasks = tasks;
+        
+        this.setOpaque(false);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 

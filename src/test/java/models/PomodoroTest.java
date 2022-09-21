@@ -2,6 +2,8 @@ package models;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class PomodoroTest {
@@ -21,9 +23,11 @@ class PomodoroTest {
     void addObjective() {
         Pomodoro pomodoro = new Pomodoro();
 
-        pomodoro.addObjective(new Objective("강의 반복 과제", 0));
-        pomodoro.addObjective(new Objective("강의 반복 과제", 0));
-        pomodoro.addObjective(new Objective("강의 반복 과제", 0));
+        List<Objective> objectives = pomodoro.getObjectives();
+
+        objectives.add(new Objective("강의 반복 과제", 0));
+        objectives.add(new Objective("강의 반복 과제", 0));
+        objectives.add(new Objective("강의 반복 과제", 0));
 
         assertEquals(3, pomodoro.getObjectives().size());
     }
@@ -39,9 +43,11 @@ class PomodoroTest {
     void addTasks() {
         Pomodoro pomodoro = new Pomodoro();
 
-        pomodoro.addTasks(new Task("강의 반복 과제", false));
+        List<Task> tasks = pomodoro.getTasks();
 
-        assertEquals(1, pomodoro.getTasks().size());
+        tasks.add(new Task("강의 반복 과제", false));
+
+        assertEquals(1, tasks.size());
     }
 
     @Test
