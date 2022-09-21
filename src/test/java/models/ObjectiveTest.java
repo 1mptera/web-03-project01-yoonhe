@@ -11,6 +11,13 @@ class ObjectiveTest {
     }
 
     @Test
+    void equals() {
+        Objective objective = new Objective("강의 반복 과제 완료 하기", 0);
+
+        assertEquals(new Objective("강의 반복 과제 완료 하기", 0), objective);
+    }
+
+    @Test
     void string() {
         Objective objective = new Objective("강의 반복 과제 완료 하기", 0);
 

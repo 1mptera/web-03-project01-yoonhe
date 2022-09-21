@@ -3,6 +3,7 @@ package pages;
 import models.Pomodoro;
 import models.Session;
 import panels.ObjectiveSelectBoxPanel;
+import panels.TaskSelectBoxPanel;
 
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -29,11 +30,9 @@ public class SessionPage extends JPanel {
 
         createQuantity();
 
-        this.add(new ObjectiveSelectBoxPanel(
-                        session,
-                        pomodoro.getObjectives()
-                )
-        );
+        this.add(new ObjectiveSelectBoxPanel(session, pomodoro.getObjectives()));
+
+        this.add(new TaskSelectBoxPanel(session, pomodoro.getTasks()));
     }
 
     public void createQuantity() {

@@ -14,8 +14,8 @@ class SessionTest {
     void setObject() {
         Session session = new Session();
 
-        session.setObjective("강의 반복 과제 완료하기");
+        session.setObjective(new Objective("강의 반복 과제 완료하기", 0));
 
-        assertEquals("강의 반복 과제 완료하기", session.getObjective());
+        assertEquals(new Objective("강의 반복 과제 완료하기", 0), session.getObjective());
     }
 }

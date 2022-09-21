@@ -17,4 +17,12 @@ public class Objective {
     public String getTitle() {
         return title;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        Objective otherObjective = (Objective) other;
+
+        return title == otherObjective.title
+                && achievementRate == otherObjective.achievementRate;
+    }
 }

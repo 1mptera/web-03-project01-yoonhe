@@ -11,6 +11,13 @@ class TaskTest {
     }
 
     @Test
+    void string() {
+        Task task = new Task("강의 반복 과제", false);
+
+        assertEquals("강의 반복 과제", task.toString());
+    }
+
+    @Test
     void getTitle() {
         Task task = new Task("강의 반복 과제", false);
 

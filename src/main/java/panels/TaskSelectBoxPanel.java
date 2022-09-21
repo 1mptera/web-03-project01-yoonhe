@@ -1,33 +1,31 @@
 package panels;
 
 import models.Objective;
-import models.Pomodoro;
 import models.Session;
+import models.Task;
 
 import javax.swing.BoxLayout;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-
 import java.awt.Color;
 import java.awt.Component;
-
 import java.util.List;
 
-public class ObjectiveSelectBoxPanel extends JPanel {
+public class TaskSelectBoxPanel extends JPanel {
     private Session session;
-    private List<Objective> objectives;
+    private List<Task> tasks;
 
-    public ObjectiveSelectBoxPanel(Session session, List<Objective> objectives) {
+    public TaskSelectBoxPanel(Session session, List<Task> tasks) {
         this.session = session;
-        this.objectives = objectives;
+        this.tasks = tasks;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new EmptyBorder(20, 0, 0, 0));
         this.setOpaque(false);
 
-        createLabel(this, "목표를 고르세요");
+        createLabel(this, "작업을 고르세요");
 
         createObjectiveComboBox();
     }
@@ -37,12 +35,14 @@ public class ObjectiveSelectBoxPanel extends JPanel {
 
         this.add(comboBox);
 
-        for (Objective objective : objectives) {
-            comboBox.addItem(objective);
+        for (Task task : tasks) {
+            comboBox.addItem(task);
         }
 
         comboBox.addActionListener(event -> {
-            session.setObjective((Objective) comboBox.getSelectedItem());
+            session.setTask((Task) comboBox.getSelectedItem());
+
+            System.out.println(session.getTask().getTitle());
         });
     }
 
