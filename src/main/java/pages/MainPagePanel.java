@@ -1,9 +1,9 @@
 package pages;
 
 import models.Objective;
+import models.Pomodoro;
 import panels.Big3Panel;
 
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
@@ -11,13 +11,19 @@ import java.awt.CardLayout;
 import java.util.List;
 
 public class MainPagePanel extends JPanel {
-    private JPanel buttonPanel;
-    private CardLayout pages;
-    private JPanel contentPanel;
+    private Pomodoro pomodoro;
 
-    public MainPagePanel(CardLayout pages, JPanel contentPanel) {
+    private CardLayout pages;
+    
+    private JPanel contentPanel;
+    private JPanel buttonPanel;
+
+    private List<Objective> objectives;
+
+    public MainPagePanel(CardLayout pages, JPanel contentPanel, Pomodoro pomodoro) {
         this.pages = pages;
         this.contentPanel = contentPanel;
+        this.pomodoro = pomodoro;
 
         this.setLayout(new BorderLayout());
 
@@ -26,18 +32,17 @@ public class MainPagePanel extends JPanel {
     }
 
     private void initBig3Panel() {
-        List<Objective> objectives = loadObjectives();
+        objectives = pomodoro.getObjectives();
+
+        createObjectives();
 
         this.add(new Big3Panel(objectives));
     }
 
-
-    public List<Objective> loadObjectives() {
-        return List.of(
-                new Objective("강의 반복 과제", 0),
-                new Objective("코딩 도장", 0),
-                new Objective("투두 리스트 과제", 0)
-        );
+    private void createObjectives() {
+        pomodoro.addObjective(new Objective("강의 반복 과제", 0));
+        pomodoro.addObjective(new Objective("코딩 도장", 0));
+        pomodoro.addObjective(new Objective("투두리스트", 0));
     }
 
     public void initButtonPanel() {
