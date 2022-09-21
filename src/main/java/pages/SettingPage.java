@@ -5,7 +5,6 @@ import panels.Big3Panel;
 import panels.SettingPomodoroQuantityPanel;
 import panels.SettingTaskPanel;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
 
@@ -16,7 +15,7 @@ public class SettingPage extends JPanel {
         this.pomodoro = pomodoro;
 
         this.setOpaque(false);
-        
+
         this.setLayout(new BorderLayout());
 
         this.add(new Big3Panel(pomodoro), BorderLayout.PAGE_START);

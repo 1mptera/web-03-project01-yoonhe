@@ -13,4 +13,8 @@ public class Objective {
     public String toString() {
         return title + " (" + achievementRate + "%)";
     }
+
+    public String getTitle() {
+        return title;
+    }
 }

@@ -51,11 +51,15 @@ class PomodoroTest {
     }
 
     @Test
-    void setTasks() {
+    void setQuantity() {
         Pomodoro pomodoro = new Pomodoro();
 
         pomodoro.setQuantity(5);
 
         assertEquals(5, pomodoro.getQuantity());
+
+        pomodoro.setQuantity(8);
+
+        assertEquals(8, pomodoro.getQuantity());
     }
 }
