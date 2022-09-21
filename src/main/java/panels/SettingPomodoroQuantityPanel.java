@@ -38,7 +38,7 @@ public class SettingPomodoroQuantityPanel extends JPanel {
         }
 
         comboBox.addActionListener(event -> {
-            pomodoro.setQuantity(5);
+            pomodoro.setQuantity((Integer) comboBox.getSelectedItem());
         });
 
         comboBoxPanel.add(comboBox);

@@ -10,7 +10,6 @@ import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.Color;
 import java.awt.Component;
 import java.util.List;
 

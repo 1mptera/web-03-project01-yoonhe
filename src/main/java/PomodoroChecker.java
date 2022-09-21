@@ -66,7 +66,7 @@ public class PomodoroChecker {
     private JButton createSessionButton() {
         JButton button = new JButton("세션");
         button.addActionListener(event -> {
-            updateContentPanel(new SessionPage());
+            updateContentPanel(new SessionPage(pomodoro));
         });
         return button;
     }

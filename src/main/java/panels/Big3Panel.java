@@ -36,8 +36,6 @@ public class Big3Panel extends JPanel {
         objectives.add(new Objective("강의 반복 과제 2", 0));
         objectives.add(new Objective("강의 반복 과제 3", 0));
 
-        System.out.println(objectives.size());
-
         for (Objective objective : objectives) {
             JLabel label = new JLabel(objective.toString());
             label.setBorder(new EmptyBorder(0, 0, 5, 0));
