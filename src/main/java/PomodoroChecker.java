@@ -1,19 +1,22 @@
 import models.Pomodoro;
 
-import pages.AddTaskPagePanel;
-import pages.PomodoroQuantityPage;
-import pages.MainPagePanel;
+import pages.SessionPage;
+import pages.SettingPage;
 
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.CardLayout;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 
 public class PomodoroChecker {
     private JFrame frame;
     private JPanel contentPanel;
 
-    private CardLayout pages;
+    private Pomodoro pomodoro;
 
     public static void main(String[] args) {
         PomodoroChecker application = new PomodoroChecker();
@@ -21,40 +24,70 @@ public class PomodoroChecker {
     }
 
     private void run() {
+        pomodoro = new Pomodoro();
+
         initFrame();
+
+        initNavigationPanel();
 
         initContentPanel();
 
         frame.setVisible(true);
     }
 
-    private void initFrame() {
+    public void initFrame() {
         frame = new JFrame("Pomodoro");
+        frame.setLayout(new BorderLayout());
+        frame.setSize(500, 600);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frame.setBounds(100, 100, 450, 300);
+    }
+
+    public void initNavigationPanel() {
+        JPanel navigationPanel = new JPanel();
+
+        frame.add(navigationPanel, BorderLayout.WEST);
+
+        navigationPanel.setLayout(new BoxLayout(navigationPanel, BoxLayout.Y_AXIS));
+        navigationPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
+        navigationPanel.setBackground(Color.orange);
+
+        navigationPanel.add(createSettingButton());
+        navigationPanel.add(createSessionButton());
+    }
+
+    private JButton createSettingButton() {
+        JButton button = new JButton("설정");
+        button.addActionListener(event -> {
+            updateContentPanel(new SettingPage(pomodoro));
+        });
+        return button;
+    }
+
+    private JButton createSessionButton() {
+        JButton button = new JButton("세션");
+        button.addActionListener(event -> {
+            updateContentPanel(new SessionPage());
+        });
+        return button;
     }
 
     public void initContentPanel() {
         contentPanel = new JPanel();
 
-        frame.add(contentPanel);
-
-        pages = new CardLayout();
-
-        contentPanel.setLayout(pages);
+        contentPanel.setBackground(Color.white);
         contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
 
-        setPages();
+        frame.add(contentPanel, BorderLayout.CENTER);
+
+        contentPanel.add(new SettingPage(pomodoro));
     }
 
-    public void setPages() {
-        Pomodoro pomodoro = new Pomodoro();
+    private void updateContentPanel(JPanel panel) {
+        contentPanel.removeAll();
 
-        contentPanel.add("MainPage",
-                new MainPagePanel(pages, contentPanel, pomodoro));
-        contentPanel.add("AddTaskPage",
-                new AddTaskPagePanel(pages, contentPanel, pomodoro));
-        contentPanel.add("pages.PomodoroQuantityPage",
-                new PomodoroQuantityPage(pages, contentPanel, pomodoro));
+        contentPanel.add(panel);
+
+        contentPanel.setVisible(false);
+        contentPanel.setVisible(true);
     }
 }

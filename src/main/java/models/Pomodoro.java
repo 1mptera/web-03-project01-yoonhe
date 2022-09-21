@@ -12,16 +12,8 @@ public class Pomodoro {
         return objectives;
     }
 
-    public void addObjective(Objective objective) {
-        objectives.add(objective);
-    }
-
     public List<Task> getTasks() {
         return tasks;
-    }
-
-    public void addTasks(Task task) {
-        tasks.add(task);
     }
 
     public void setQuantity(int i) {
