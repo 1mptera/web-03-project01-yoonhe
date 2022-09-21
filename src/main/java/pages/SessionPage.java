@@ -1,23 +1,22 @@
 package pages;
 
-import models.Objective;
 import models.Pomodoro;
+import models.Session;
+import panels.ObjectiveSelectBoxPanel;
 
 import javax.swing.BoxLayout;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
 import java.awt.Color;
 import java.awt.Component;
 
 public class SessionPage extends JPanel {
+    private Session session;
     private Pomodoro pomodoro;
 
-    private JPanel objectiveFieldPanel;
-
     public SessionPage(Pomodoro pomodoro) {
+        session = new Session();
+
         this.pomodoro = pomodoro;
 
         if (pomodoro.getQuantity() == 0) {
@@ -30,7 +29,11 @@ public class SessionPage extends JPanel {
 
         createQuantity();
 
-        createObjectiveSelectBox();
+        this.add(new ObjectiveSelectBoxPanel(
+                        session,
+                        pomodoro.getObjectives()
+                )
+        );
     }
 
     public void createQuantity() {
@@ -40,35 +43,6 @@ public class SessionPage extends JPanel {
 
         this.add(label);
     }
-
-    public void createObjectiveSelectBox() {
-        objectiveFieldPanel = new JPanel();
-
-        this.add(objectiveFieldPanel);
-
-        objectiveFieldPanel.setLayout(new BoxLayout(objectiveFieldPanel, BoxLayout.Y_AXIS));
-        objectiveFieldPanel.setBorder(new EmptyBorder(20, 0, 0, 0));
-        objectiveFieldPanel.setOpaque(false);
-
-        createLabel(objectiveFieldPanel, "목표를 고르세요");
-
-        createObjectiveComboBox();
-    }
-
-    private void createObjectiveComboBox() {
-        JComboBox comboBox = new JComboBox();
-
-        comboBox.setModel(new DefaultComboBoxModel(
-                        new String[]{
-                                new Objective("강의 반복 과제", 0).getTitle(),
-                                new Objective("개념 공부", 0).getTitle(),
-                        }
-                )
-        );
-
-        objectiveFieldPanel.add(comboBox);
-    }
-
 
     private void createLabel(JPanel target, String text) {
         JLabel label = new JLabel(text);

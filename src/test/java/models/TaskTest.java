@@ -25,11 +25,4 @@ class TaskTest {
 
         assertEquals("수정 강의 반복 과제", task.getTitle());
     }
-
-    @Test
-    void string() {
-        Task task = new Task("강의 반복 과제", false);
-
-        assertEquals("수정 강의 반복 과제", task.toString());
-    }
 }
