@@ -16,4 +16,9 @@ public class Task {
     public void editTitle(String title) {
         this.title = title;
     }
+
+    @Override
+    public String toString() {
+        return title;
+    }
 }
