@@ -62,4 +62,23 @@ class PomodoroTest {
 
         assertEquals(8, pomodoro.getQuantity());
     }
+
+    @Test
+    void addSession() {
+        Pomodoro pomodoro = new Pomodoro();
+
+        pomodoro.setQuantity(2);
+
+        assertEquals(1, pomodoro.currentInProgressSessionIndex());
+
+        Session session = new Session();
+
+        session.setReview(true, "높음", "새로 알게된 것", "아쉬원던 점", "개선시킬 점");
+
+        pomodoro.addSession(session);
+
+        assertEquals(2, pomodoro.currentInProgressSessionIndex());
+
+        assertEquals(1, pomodoro.sessions().size());
+    }
 }

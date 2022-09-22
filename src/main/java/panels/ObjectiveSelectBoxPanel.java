@@ -46,7 +46,6 @@ public class ObjectiveSelectBoxPanel extends JPanel {
         });
     }
 
-
     private void createLabel(JPanel target, String text) {
         JLabel label = new JLabel(text);
         label.setAlignmentX(Component.CENTER_ALIGNMENT);

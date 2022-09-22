@@ -1,5 +1,6 @@
 import models.Pomodoro;
 
+import panels.ContentPanel;
 import panels.SessionPage;
 import panels.SettingPage;
 
@@ -13,7 +14,7 @@ import java.awt.Color;
 
 public class PomodoroChecker {
     private JFrame frame;
-    private JPanel contentPanel;
+    private ContentPanel contentPanel;
 
     private Pomodoro pomodoro;
 
@@ -54,10 +55,16 @@ public class PomodoroChecker {
         navigationPanel.add(createSessionButton());
     }
 
+    public void initContentPanel() {
+        contentPanel = new ContentPanel(pomodoro);
+
+        frame.add(contentPanel, BorderLayout.CENTER);
+    }
+
     private JButton createSettingButton() {
         JButton button = new JButton("설정");
         button.addActionListener(event -> {
-            updateContentPanel(new SettingPage(pomodoro));
+            contentPanel.update(new SettingPage(pomodoro));
         });
         return button;
     }
@@ -65,28 +72,8 @@ public class PomodoroChecker {
     private JButton createSessionButton() {
         JButton button = new JButton("세션");
         button.addActionListener(event -> {
-            updateContentPanel(new SessionPage(pomodoro));
+            contentPanel.update(new SessionPage(pomodoro, contentPanel));
         });
         return button;
-    }
-
-    public void initContentPanel() {
-        contentPanel = new JPanel();
-
-        contentPanel.setBackground(Color.white);
-        contentPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
-
-        frame.add(contentPanel, BorderLayout.CENTER);
-
-        contentPanel.add(new SettingPage(pomodoro));
-    }
-
-    private void updateContentPanel(JPanel panel) {
-        contentPanel.removeAll();
-
-        contentPanel.add(panel);
-
-        contentPanel.setVisible(false);
-        contentPanel.setVisible(true);
     }
 }

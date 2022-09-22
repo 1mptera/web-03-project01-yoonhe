@@ -17,27 +17,47 @@ public class SessionPage extends JPanel {
     private Pomodoro pomodoro;
     private JPanel sessionMainButtonPanel;
 
-    public SessionPage(Pomodoro pomodoro) {
+    private ObjectiveSelectBoxPanel objectiveSelectBoxPanel;
+    private TaskSelectBoxPanel taskSelectBoxPanel;
+    private JPanel beforeStartingSettingPanel;
+    private ContentPanel contentPanel;
+
+    public SessionPage(Pomodoro pomodoro, ContentPanel contentPanel) {
         session = new Session();
 
         this.pomodoro = pomodoro;
+
+        this.contentPanel = contentPanel;
+
 
         this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
         createQuantity();
 
+        createBeforeStartingSettingPanel();
+
+        createReviewFieldContainerPanel();
+    }
+
+    public void createBeforeStartingSettingPanel() {
+        beforeStartingSettingPanel = new JPanel();
+        beforeStartingSettingPanel.setLayout(
+                new BoxLayout(beforeStartingSettingPanel, BoxLayout.Y_AXIS)
+        );
+        this.add(beforeStartingSettingPanel);
+
         createObjectiveSelectBoxPanel();
 
         createTaskSelectBoxPanel();
 
         createButtonPanel();
-
-        createReviewFieldContainerPanel();
     }
 
     public void createQuantity() {
-        JLabel label = new JLabel("1 / " + pomodoro.getQuantity());
+        JLabel label =
+                new JLabel(pomodoro.currentInProgressSessionIndex() +
+                        " / " + pomodoro.getQuantity());
 
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -45,22 +65,29 @@ public class SessionPage extends JPanel {
     }
 
     public void createObjectiveSelectBoxPanel() {
-        this.add(new ObjectiveSelectBoxPanel(session, pomodoro.getObjectives()));
+        objectiveSelectBoxPanel
+                = new ObjectiveSelectBoxPanel(session, pomodoro.getObjectives());
+
+        beforeStartingSettingPanel.add(objectiveSelectBoxPanel);
     }
 
     public void createTaskSelectBoxPanel() {
-        this.add(new TaskSelectBoxPanel(session, pomodoro.getTasks()));
+        taskSelectBoxPanel
+                = new TaskSelectBoxPanel(session, pomodoro.getTasks());
+
+        beforeStartingSettingPanel.add(taskSelectBoxPanel);
     }
 
     public void createReviewFieldContainerPanel() {
-        reviewFieldContainerPanel = new ReviewFieldsContainerPanel(session);
+        reviewFieldContainerPanel =
+                new ReviewFieldsContainerPanel(pomodoro, session, contentPanel);
         this.add(reviewFieldContainerPanel);
     }
 
     public void createButtonPanel() {
         sessionMainButtonPanel = new JPanel();
 
-        this.add(sessionMainButtonPanel);
+        beforeStartingSettingPanel.add(sessionMainButtonPanel);
 
         sessionMainButtonPanel.add(createStartButton());
     }
@@ -86,6 +113,7 @@ public class SessionPage extends JPanel {
 
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(event -> {
+            beforeStartingSettingPanel.setVisible(false);
             sessionMainButtonPanel.setVisible(false);
             reviewFieldContainerPanel.setVisible(true);
         });

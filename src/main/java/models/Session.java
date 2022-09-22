@@ -3,14 +3,18 @@ package models;
 public class Session {
     private Objective objective;
     private Task task;
+
     private String status;
-    private String concentrationLabel;
     private boolean completed;
+    private String concentrationLevel;
+    private String newPoint;
+    private String improvementPoint;
+    private String regretPoint;
 
     public Session() {
         this.completed = false;
         this.status = "Waiting";
-        this.concentrationLabel = "보통";
+        this.concentrationLevel = "보통";
     }
 
     public void setObjective(Objective objective) {
@@ -41,19 +45,30 @@ public class Session {
         status = "Exit";
     }
 
-    public void completed() {
-        completed = true;
-    }
-
     public boolean isCompleted() {
         return completed;
     }
 
-    public void setConcentrationLevel(String concentrationLabel) {
-        this.concentrationLabel = concentrationLabel;
+    public String concentrationLevel() {
+        return concentrationLevel;
     }
 
-    public String getConcentrationLabel() {
-        return concentrationLabel;
+    public void setReview(
+            boolean completed,
+            String concentrationLevel,
+            String newPoint,
+            String improvementPoint,
+            String regretPoint
+    ) {
+        this.completed = completed;
+        this.concentrationLevel = concentrationLevel;
+        this.newPoint = newPoint;
+        this.improvementPoint = improvementPoint;
+        this.regretPoint = regretPoint;
+    }
+
+    public String[] reviews(
+    ) {
+        return new String[]{"완료", "높음", "새로 알게된 것", "아쉬원던 점", "개선시킬 점"};
     }
 }
