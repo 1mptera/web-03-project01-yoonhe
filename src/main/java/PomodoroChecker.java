@@ -1,6 +1,7 @@
 import models.Pomodoro;
 
 import panels.ContentPanel;
+import panels.ReviewListPage;
 import panels.SessionPage;
 import panels.SettingPage;
 
@@ -53,6 +54,7 @@ public class PomodoroChecker {
 
         navigationPanel.add(createSettingButton());
         navigationPanel.add(createSessionButton());
+        navigationPanel.add(createReviewButton());
     }
 
     public void initContentPanel() {
@@ -73,6 +75,14 @@ public class PomodoroChecker {
         JButton button = new JButton("세션");
         button.addActionListener(event -> {
             contentPanel.update(new SessionPage(pomodoro, contentPanel));
+        });
+        return button;
+    }
+
+    private JButton createReviewButton() {
+        JButton button = new JButton("리뷰");
+        button.addActionListener(event -> {
+            contentPanel.update(new ReviewListPage(pomodoro, contentPanel));
         });
         return button;
     }
