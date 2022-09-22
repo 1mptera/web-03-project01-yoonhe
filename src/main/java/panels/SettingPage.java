@@ -1,9 +1,6 @@
-package pages;
+package panels;
 
 import models.Pomodoro;
-import panels.Big3Panel;
-import panels.SettingPomodoroQuantityPanel;
-import panels.SettingTaskPanel;
 
 import javax.swing.JPanel;
 import java.awt.BorderLayout;
