@@ -1,5 +1,6 @@
 package panels;
 
+import models.Pomodoro;
 import models.Session;
 
 import javax.swing.BoxLayout;
@@ -13,41 +14,48 @@ import javax.swing.border.EmptyBorder;
 import java.awt.Component;
 
 public class ReviewFieldsContainerPanel extends JPanel {
+    private Pomodoro pomodoro;
     private Session session;
 
-    private final JPanel taskCompletedCheckPanel;
-    private final JPanel concentrationCheckPanel;
-    private final JPanel newPointTextFieldPanel;
-    private final JPanel regretPointTextFieldPanel;
-    private final JPanel improvementPointTextFieldPanel;
+    private ContentPanel contentPanel;
 
-    public ReviewFieldsContainerPanel(Session session) {
+    private JCheckBox completedCheckBox;
+    private JComboBox<String> ConcentrationLevelSelectBox;
+
+    private final JTextField newPointTextField;
+    private final JTextField regretPointTextField;
+    private final JTextField improvementPointTextField;
+
+    public ReviewFieldsContainerPanel(Pomodoro pomodoro, Session session, ContentPanel contentPanel) {
+        this.pomodoro = pomodoro;
         this.session = session;
+        this.contentPanel = contentPanel;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setVisible(false);
 
         createTitlePanel();
 
-        taskCompletedCheckPanel = createTaskCompletedCheckPanel();
-        concentrationCheckPanel = createConcentrationLevelCheckPanel();
-        newPointTextFieldPanel = createTextField("새로 알게된 것");
-        regretPointTextFieldPanel = createTextField("아쉬운 점");
-        improvementPointTextFieldPanel = createTextField("다음 세션에서 개선시킬 점");
+        createTaskCompletedCheckPanel();
+        createConcentrationLevelCheckPanel();
+        newPointTextField = createTextFieldPanel("새로 알게된 것");
+        regretPointTextField = createTextFieldPanel("아쉬운 점");
+        improvementPointTextField = createTextFieldPanel("다음 세션에서 개선시킬 점");
+
         createSubmitButton();
     }
 
     private void createTitlePanel() {
         JPanel panel = new JPanel();
-        this.add(panel);
         panel.setBorder(new EmptyBorder(20, 0, 20, 0));
 
         createTitleLabel("이번 세션에서 무엇을 배우셨나요?", panel);
+
+        this.add(panel);
     }
 
-    private JPanel createTaskCompletedCheckPanel() {
+    private void createTaskCompletedCheckPanel() {
         JPanel panel = new JPanel();
-        this.add(panel);
 
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -56,20 +64,19 @@ public class ReviewFieldsContainerPanel extends JPanel {
 
         createTaskCheckBox(panel);
 
-        return panel;
+        this.add(panel);
     }
 
     private void createTaskCheckBox(JPanel panel) {
-        JCheckBox checkBox = new JCheckBox("당연하죠!");
+        completedCheckBox = new JCheckBox("당연하죠!");
 
-        checkBox.setAlignmentX(Component.CENTER_ALIGNMENT);
+        completedCheckBox.setAlignmentX(Component.CENTER_ALIGNMENT);
 
-        panel.add(checkBox);
+        panel.add(completedCheckBox);
     }
 
-    public JPanel createConcentrationLevelCheckPanel() {
+    public void createConcentrationLevelCheckPanel() {
         JPanel panel = new JPanel();
-        this.add(panel);
 
         panel.setBorder(new EmptyBorder(20, 20, 20, 20));
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -78,29 +85,29 @@ public class ReviewFieldsContainerPanel extends JPanel {
 
         createConcentrationSelectBox(panel);
 
-        return panel;
+        this.add(panel);
     }
 
     public void createConcentrationSelectBox(JPanel panel) {
-        JComboBox<String> comboBox = new JComboBox<>();
-        comboBox.addItem("보통");
-        comboBox.addItem("중간");
-        comboBox.addItem("높음");
+        ConcentrationLevelSelectBox = new JComboBox<>();
+        ConcentrationLevelSelectBox.addItem("보통");
+        ConcentrationLevelSelectBox.addItem("중간");
+        ConcentrationLevelSelectBox.addItem("높음");
 
-        panel.add(comboBox);
+        panel.add(ConcentrationLevelSelectBox);
     }
 
-    public JPanel createTextField(String title) {
+    public JTextField createTextFieldPanel(String title) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
-        this.add(panel);
-
         panel.add(new JLabel(title));
 
         JTextField textField = new JTextField(20);
         panel.add(textField);
 
-        return panel;
+        this.add(panel);
+
+        return textField;
     }
 
     public void createSubmitButton() {
@@ -109,6 +116,20 @@ public class ReviewFieldsContainerPanel extends JPanel {
         this.add(panel);
 
         JButton button = new JButton("제출하기");
+        button.addActionListener(event -> {
+            boolean isCompleted = completedCheckBox.isSelected();
+            String concentrationLevel = (String) ConcentrationLevelSelectBox.getSelectedItem();
+            String newPoint = newPointTextField.getText();
+            String improvementPoint = improvementPointTextField.getText();
+            String regretPoint = regretPointTextField.getText();
+
+            session.setReview(isCompleted, concentrationLevel,
+                    newPoint, improvementPoint, regretPoint);
+
+            pomodoro.addSession(session);
+
+            contentPanel.update(new SessionPage(pomodoro, contentPanel));
+        });
         panel.add(button);
 
         this.add(button);

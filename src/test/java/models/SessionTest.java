@@ -35,24 +35,13 @@ class SessionTest {
     }
 
     @Test
-    void completed() {
+    void setReview() {
         Session session = new Session();
 
-        assertFalse(session.isCompleted());
+        session.setReview(true, "높음", "새로 알게된 것", "아쉬원던 점", "개선시킬 점");
 
-        session.completed();
-
-        assertTrue(session.isCompleted());
-    }
-
-    @Test
-    void setConcentrationLevel() {
-        Session session = new Session();
-
-        assertEquals("보통", session.getConcentrationLabel());
-
-        session.setConcentrationLevel("높음");
-
-        assertEquals("높음", session.getConcentrationLabel());
+        assertArrayEquals(new String[]{
+                "완료", "높음", "새로 알게된 것", "아쉬원던 점", "개선시킬 점"
+        }, session.reviews());
     }
 }
