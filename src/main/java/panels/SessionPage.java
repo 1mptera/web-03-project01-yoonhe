@@ -29,7 +29,6 @@ public class SessionPage extends JPanel {
 
         this.contentPanel = contentPanel;
 
-
         this.setOpaque(false);
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -96,14 +95,6 @@ public class SessionPage extends JPanel {
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(event -> {
             session.start();
-
-            if (session.getObjective().getTitle() != "") {
-
-            }
-
-            if (session.getTask().getTitle() != "") {
-
-            }
 
             sessionMainButtonPanel.removeAll();
             sessionMainButtonPanel.add(createEndButton());

@@ -73,7 +73,18 @@ class PomodoroTest {
 
         Session session = new Session();
 
-        session.setReview(true, "높음", "새로 알게된 것", "아쉬원던 점", "개선시킬 점");
+        Task task = new Task("작업1", true);
+        ConcentrationLevel concentrationLevel = new ConcentrationLevel();
+
+        Review review = new Review(
+                task,
+                concentrationLevel,
+                "객체 지향에 대해 알게되었다",
+                "목표와 정렬되지 않은 일을 했다",
+                "목표와 정렬된 일을 고르자"
+        );
+
+        session.setReview(review);
 
         pomodoro.addSession(session);
 
