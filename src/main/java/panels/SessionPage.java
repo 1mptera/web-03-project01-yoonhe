@@ -36,8 +36,6 @@ public class SessionPage extends JPanel {
         createQuantity();
 
         createBeforeStartingSettingPanel();
-
-        createReviewFieldContainerPanel();
     }
 
     public void createBeforeStartingSettingPanel() {
@@ -99,6 +97,14 @@ public class SessionPage extends JPanel {
         button.addActionListener(event -> {
             session.start();
 
+            if (session.getObjective().getTitle() != "") {
+
+            }
+
+            if (session.getTask().getTitle() != "") {
+
+            }
+
             sessionMainButtonPanel.removeAll();
             sessionMainButtonPanel.add(createEndButton());
             sessionMainButtonPanel.setVisible(false);
@@ -115,7 +121,7 @@ public class SessionPage extends JPanel {
         button.addActionListener(event -> {
             beforeStartingSettingPanel.setVisible(false);
             sessionMainButtonPanel.setVisible(false);
-            reviewFieldContainerPanel.setVisible(true);
+            createReviewFieldContainerPanel();
         });
 
         return button;

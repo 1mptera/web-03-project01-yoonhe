@@ -32,7 +32,8 @@ public class ReviewFieldsContainerPanel extends JPanel {
         this.contentPanel = contentPanel;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setVisible(false);
+
+        createSessionDetailPanel();
 
         createTitlePanel();
 
@@ -43,6 +44,20 @@ public class ReviewFieldsContainerPanel extends JPanel {
         improvementPointTextField = createTextFieldPanel("다음 세션에서 개선시킬 점");
 
         createSubmitButton();
+    }
+
+    public void createSessionDetailPanel() {
+        JPanel panel = new JPanel();
+        this.add(panel);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
+        JLabel objectiveLabel = new JLabel("목표 : " + session.getObjective());
+        objectiveLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(objectiveLabel);
+
+        JLabel taskLabel = new JLabel("작업 : " + session.getTask());
+        taskLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
+        panel.add(taskLabel);
     }
 
     private void createTitlePanel() {

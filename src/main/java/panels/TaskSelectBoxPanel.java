@@ -41,6 +41,8 @@ public class TaskSelectBoxPanel extends JPanel {
 
         comboBox.addActionListener(event -> {
             session.setTask((Task) comboBox.getSelectedItem());
+
+            System.out.println(session.getTask().toString());
         });
     }
 
