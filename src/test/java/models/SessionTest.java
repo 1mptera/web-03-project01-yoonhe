@@ -16,7 +16,7 @@ class SessionTest {
 
         session.setObjective(new Objective("강의 반복 과제 완료하기", 0));
 
-        assertEquals(new Objective("강의 반복 과제 완료하기", 0), session.getObjective());
+        assertEquals(new Objective("강의 반복 과제 완료하기", 0), session.objective());
     }
 
     @Test
@@ -38,10 +38,27 @@ class SessionTest {
     void setReview() {
         Session session = new Session();
 
-        session.setReview(true, "높음", "새로 알게된 것", "아쉬원던 점", "개선시킬 점");
+        Task task = new Task("마뱅", true);
+
+        ConcentrationLevel concentrationLevel = new ConcentrationLevel();
+        concentrationLevel.setLevel("높음");
+
+        Review review = new Review(
+                task,
+                concentrationLevel,
+                "객체 지향에 대해 알게되었다",
+                "목표와 정렬되지 않은 일을 했다",
+                "목표와 정렬된 일을 고르자"
+        );
+
+        session.setReview(review);
 
         assertArrayEquals(new String[]{
-                "완료", "높음", "새로 알게된 것", "아쉬원던 점", "개선시킬 점"
-        }, session.reviews());
+                "작업: 마뱅 / 완료 여부: 성공",
+                "집중도: 높음",
+                "새로 알게된 것: 객체 지향에 대해 알게되었다",
+                "아쉬원던 점: 목표와 정렬되지 않은 일을 했다",
+                "개선시킬 점: 목표와 정렬된 일을 고르자"
+        }, session.review().values());
     }
 }

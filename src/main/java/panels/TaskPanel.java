@@ -46,7 +46,7 @@ public class TaskPanel extends JPanel {
     }
 
     private void displayTaskTitle() {
-        JLabel label = new JLabel("- " + task.getTitle());
+        JLabel label = new JLabel("- " + task.title());
         taskTitlePanel.add(label);
 
         taskTitlePanel.add(createEditButton());
@@ -64,7 +64,7 @@ public class TaskPanel extends JPanel {
     private JButton createEditButton() {
         JButton button = new JButton("수정");
         button.addActionListener(event -> {
-            textField.setText(task.getTitle());
+            textField.setText(task.title());
 
             onEditMode();
         });

@@ -14,7 +14,7 @@ public class Objective {
         return title + " (" + achievementRate + "%)";
     }
 
-    public String getTitle() {
+    public String title() {
         return title;
     }
 

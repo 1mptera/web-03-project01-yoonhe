@@ -1,7 +1,10 @@
 package panels;
 
+import models.ConcentrationLevel;
 import models.Pomodoro;
+import models.Review;
 import models.Session;
+import models.Task;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -51,11 +54,12 @@ public class ReviewFieldsContainerPanel extends JPanel {
         this.add(panel);
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
-        JLabel objectiveLabel = new JLabel("목표 : " + session.getObjective());
+        JLabel objectiveLabel = new JLabel("목표 : " + session.objective().title());
         objectiveLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(objectiveLabel);
 
-        JLabel taskLabel = new JLabel("작업 : " + session.getTask());
+        JLabel taskLabel = new JLabel("작업 : " + session.task().title());
+
         taskLabel.setAlignmentX(Component.CENTER_ALIGNMENT);
         panel.add(taskLabel);
     }
@@ -104,10 +108,14 @@ public class ReviewFieldsContainerPanel extends JPanel {
     }
 
     public void createConcentrationSelectBox(JPanel panel) {
+        ConcentrationLevel concentrationLevel = new ConcentrationLevel();
+        String[] levels = concentrationLevel.levels();
+
         ConcentrationLevelSelectBox = new JComboBox<>();
-        ConcentrationLevelSelectBox.addItem("보통");
-        ConcentrationLevelSelectBox.addItem("중간");
-        ConcentrationLevelSelectBox.addItem("높음");
+
+        for (String level : levels) {
+            ConcentrationLevelSelectBox.addItem(level);
+        }
 
         panel.add(ConcentrationLevelSelectBox);
     }
@@ -132,14 +140,26 @@ public class ReviewFieldsContainerPanel extends JPanel {
 
         JButton button = new JButton("제출하기");
         button.addActionListener(event -> {
+            Task task = session.task();
             boolean isCompleted = completedCheckBox.isSelected();
-            String concentrationLevel = (String) ConcentrationLevelSelectBox.getSelectedItem();
+            ConcentrationLevel concentrationLevel
+                    = (ConcentrationLevel) ConcentrationLevelSelectBox.getSelectedItem();
             String newPoint = newPointTextField.getText();
             String improvementPoint = improvementPointTextField.getText();
             String regretPoint = regretPointTextField.getText();
 
-            session.setReview(isCompleted, concentrationLevel,
+            if (isCompleted) {
+                task.completed();
+            }
+
+            if (!isCompleted) {
+                task.incomplete();
+            }
+
+            Review review = new Review(task, concentrationLevel,
                     newPoint, improvementPoint, regretPoint);
+
+            session.setReview(review);
 
             pomodoro.addSession(session);
 

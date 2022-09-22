@@ -9,7 +9,7 @@ public class Task {
         this.completed = completed;
     }
 
-    public String getTitle() {
+    public String title() {
         return title;
     }
 
@@ -19,6 +19,22 @@ public class Task {
 
     @Override
     public String toString() {
-        return title;
+        return "작업: " + title + " / 완료 여부: " + completedToString();
+    }
+
+    public void complete() {
+        completed = true;
+    }
+
+    public void incomplete() {
+        completed = false;
+    }
+
+    public boolean completed() {
+        return completed;
+    }
+
+    public String completedToString() {
+        return completed ? "성공" : "실패";
     }
 }

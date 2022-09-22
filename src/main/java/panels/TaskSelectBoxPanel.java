@@ -1,6 +1,5 @@
 package panels;
 
-import models.Objective;
 import models.Session;
 import models.Task;
 
@@ -36,13 +35,13 @@ public class TaskSelectBoxPanel extends JPanel {
         this.add(comboBox);
 
         for (Task task : tasks) {
-            comboBox.addItem(task);
+            comboBox.addItem(task.title());
         }
 
         comboBox.addActionListener(event -> {
-            session.setTask((Task) comboBox.getSelectedItem());
+            Task task = new Task((String) comboBox.getSelectedItem(), false);
 
-            System.out.println(session.getTask().toString());
+            session.setTask(task);
         });
     }
 
