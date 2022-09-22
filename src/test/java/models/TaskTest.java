@@ -35,13 +35,13 @@ class TaskTest {
 
     @Test
     void completedToString() {
-        Task failTask = new Task("강의 반복 과제", false);
+        Task task = new Task("강의 반복 과제", false);
 
-        assertEquals("실패", failTask.completedToString());
+        assertEquals("실패", task.completedToString());
 
-        Task successTask = new Task("강의 반복 과제", true);
+        task.complete();
 
-        assertEquals("성공", successTask.completedToString());
+        assertEquals("성공", task.completedToString());
     }
 
     @Test

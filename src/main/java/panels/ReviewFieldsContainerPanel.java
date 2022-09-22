@@ -28,6 +28,7 @@ public class ReviewFieldsContainerPanel extends JPanel {
     private final JTextField newPointTextField;
     private final JTextField regretPointTextField;
     private final JTextField improvementPointTextField;
+    private ConcentrationLevel concentrationLevel;
 
     public ReviewFieldsContainerPanel(Pomodoro pomodoro, Session session, ContentPanel contentPanel) {
         this.pomodoro = pomodoro;
@@ -108,7 +109,8 @@ public class ReviewFieldsContainerPanel extends JPanel {
     }
 
     public void createConcentrationSelectBox(JPanel panel) {
-        ConcentrationLevel concentrationLevel = new ConcentrationLevel();
+        concentrationLevel = new ConcentrationLevel();
+
         String[] levels = concentrationLevel.levels();
 
         ConcentrationLevelSelectBox = new JComboBox<>();
@@ -116,6 +118,13 @@ public class ReviewFieldsContainerPanel extends JPanel {
         for (String level : levels) {
             ConcentrationLevelSelectBox.addItem(level);
         }
+
+        ConcentrationLevelSelectBox.addActionListener(event -> {
+            String level =
+                    (String) ConcentrationLevelSelectBox.getSelectedItem();
+
+            concentrationLevel.setLevel(level);
+        });
 
         panel.add(ConcentrationLevelSelectBox);
     }
@@ -141,15 +150,16 @@ public class ReviewFieldsContainerPanel extends JPanel {
         JButton button = new JButton("제출하기");
         button.addActionListener(event -> {
             Task task = session.task();
+
             boolean isCompleted = completedCheckBox.isSelected();
-            ConcentrationLevel concentrationLevel
-                    = (ConcentrationLevel) ConcentrationLevelSelectBox.getSelectedItem();
             String newPoint = newPointTextField.getText();
             String improvementPoint = improvementPointTextField.getText();
             String regretPoint = regretPointTextField.getText();
 
+            System.out.println();
+
             if (isCompleted) {
-                task.completed();
+                task.complete();
             }
 
             if (!isCompleted) {
@@ -157,7 +167,7 @@ public class ReviewFieldsContainerPanel extends JPanel {
             }
 
             Review review = new Review(task, concentrationLevel,
-                    newPoint, improvementPoint, regretPoint);
+                    newPoint, regretPoint, improvementPoint);
 
             session.setReview(review);
 

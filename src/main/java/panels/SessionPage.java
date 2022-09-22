@@ -110,6 +110,8 @@ public class SessionPage extends JPanel {
 
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(event -> {
+            session.end();
+
             beforeStartingSettingPanel.setVisible(false);
             sessionMainButtonPanel.setVisible(false);
             createReviewFieldContainerPanel();
