@@ -1,7 +1,7 @@
 import models.Pomodoro;
 
-import pages.SessionPage;
-import pages.SettingPage;
+import panels.SessionPage;
+import panels.SettingPage;
 
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -10,7 +10,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Dimension;
 
 public class PomodoroChecker {
     private JFrame frame;
@@ -38,7 +37,7 @@ public class PomodoroChecker {
     public void initFrame() {
         frame = new JFrame("Pomodoro");
         frame.setLayout(new BorderLayout());
-        frame.setSize(500, 600);
+        frame.setSize(500, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 

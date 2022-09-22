@@ -22,7 +22,7 @@ public class TaskSelectBoxPanel extends JPanel {
         this.tasks = tasks;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
-        this.setBorder(new EmptyBorder(20, 0, 0, 0));
+        this.setBorder(new EmptyBorder(20, 0, 50, 0));
         this.setOpaque(false);
 
         createLabel(this, "작업을 고르세요");
@@ -41,8 +41,6 @@ public class TaskSelectBoxPanel extends JPanel {
 
         comboBox.addActionListener(event -> {
             session.setTask((Task) comboBox.getSelectedItem());
-
-            System.out.println(session.getTask().getTitle());
         });
     }
 
