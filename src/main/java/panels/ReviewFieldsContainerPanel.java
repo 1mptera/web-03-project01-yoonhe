@@ -15,12 +15,6 @@ import java.awt.Component;
 public class ReviewFieldsContainerPanel extends JPanel {
     private Session session;
 
-    private final JPanel taskCompletedCheckPanel;
-    private final JPanel concentrationCheckPanel;
-    private final JPanel newPointTextFieldPanel;
-    private final JPanel regretPointTextFieldPanel;
-    private final JPanel improvementPointTextFieldPanel;
-
     public ReviewFieldsContainerPanel(Session session) {
         this.session = session;
 
@@ -29,11 +23,11 @@ public class ReviewFieldsContainerPanel extends JPanel {
 
         createTitlePanel();
 
-        taskCompletedCheckPanel = createTaskCompletedCheckPanel();
-        concentrationCheckPanel = createConcentrationLevelCheckPanel();
-        newPointTextFieldPanel = createTextField("새로 알게된 것");
-        regretPointTextFieldPanel = createTextField("아쉬운 점");
-        improvementPointTextFieldPanel = createTextField("다음 세션에서 개선시킬 점");
+        createTaskCompletedCheckPanel();
+        createConcentrationLevelCheckPanel();
+        createTextField("새로 알게된 것");
+        createTextField("아쉬운 점");
+        createTextField("다음 세션에서 개선시킬 점");
         createSubmitButton();
     }
 
@@ -45,7 +39,7 @@ public class ReviewFieldsContainerPanel extends JPanel {
         createTitleLabel("이번 세션에서 무엇을 배우셨나요?", panel);
     }
 
-    private JPanel createTaskCompletedCheckPanel() {
+    private void createTaskCompletedCheckPanel() {
         JPanel panel = new JPanel();
         this.add(panel);
 
@@ -55,8 +49,6 @@ public class ReviewFieldsContainerPanel extends JPanel {
         createTitleLabel("작업 완료 했나요?", panel);
 
         createTaskCheckBox(panel);
-
-        return panel;
     }
 
     private void createTaskCheckBox(JPanel panel) {
@@ -67,7 +59,7 @@ public class ReviewFieldsContainerPanel extends JPanel {
         panel.add(checkBox);
     }
 
-    public JPanel createConcentrationLevelCheckPanel() {
+    public void createConcentrationLevelCheckPanel() {
         JPanel panel = new JPanel();
         this.add(panel);
 
@@ -77,8 +69,6 @@ public class ReviewFieldsContainerPanel extends JPanel {
         createTitleLabel("스스로의 집중도를 평가해봅시다", panel);
 
         createConcentrationSelectBox(panel);
-
-        return panel;
     }
 
     public void createConcentrationSelectBox(JPanel panel) {
@@ -90,7 +80,7 @@ public class ReviewFieldsContainerPanel extends JPanel {
         panel.add(comboBox);
     }
 
-    public JPanel createTextField(String title) {
+    public void createTextField(String title) {
         JPanel panel = new JPanel();
         panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
         this.add(panel);
@@ -99,8 +89,6 @@ public class ReviewFieldsContainerPanel extends JPanel {
 
         JTextField textField = new JTextField(20);
         panel.add(textField);
-
-        return panel;
     }
 
     public void createSubmitButton() {
@@ -109,6 +97,9 @@ public class ReviewFieldsContainerPanel extends JPanel {
         this.add(panel);
 
         JButton button = new JButton("제출하기");
+        button.addActionListener(event -> {
+
+        });
         panel.add(button);
 
         this.add(button);
