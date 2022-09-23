@@ -54,7 +54,7 @@ public class SessionPage extends JPanel {
     public void createQuantity() {
         JLabel label =
                 new JLabel(pomodoro.currentInProgressSessionIndex() +
-                        " / " + pomodoro.getQuantity());
+                        " / " + pomodoro.quantity());
 
         label.setAlignmentX(Component.CENTER_ALIGNMENT);
 
@@ -63,14 +63,14 @@ public class SessionPage extends JPanel {
 
     public void createObjectiveSelectBoxPanel() {
         objectiveSelectBoxPanel
-                = new ObjectiveSelectBoxPanel(session, pomodoro.getObjectives());
+                = new ObjectiveSelectBoxPanel(session, pomodoro.objectives());
 
         beforeStartingSettingPanel.add(objectiveSelectBoxPanel);
     }
 
     public void createTaskSelectBoxPanel() {
         taskSelectBoxPanel
-                = new TaskSelectBoxPanel(session, pomodoro.getTasks());
+                = new TaskSelectBoxPanel(session, pomodoro.tasks());
 
         beforeStartingSettingPanel.add(taskSelectBoxPanel);
     }
@@ -94,6 +94,14 @@ public class SessionPage extends JPanel {
 
         button.setAlignmentX(Component.CENTER_ALIGNMENT);
         button.addActionListener(event -> {
+            if (session.objective() == null) {
+                session.setObjective(pomodoro.objectives().get(0));
+            }
+
+            if (session.task() == null) {
+                session.setTask(pomodoro.tasks().get(0));
+            }
+
             session.start();
 
             sessionMainButtonPanel.removeAll();

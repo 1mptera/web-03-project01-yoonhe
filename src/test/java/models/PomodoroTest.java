@@ -16,34 +16,34 @@ class PomodoroTest {
     void getObjectives() {
         Pomodoro pomodoro = new Pomodoro();
 
-        assertNotNull(pomodoro.getObjectives());
+        assertNotNull(pomodoro.objectives());
     }
 
     @Test
     void addObjective() {
         Pomodoro pomodoro = new Pomodoro();
 
-        List<Objective> objectives = pomodoro.getObjectives();
+        List<Objective> objectives = pomodoro.objectives();
 
         objectives.add(new Objective("강의 반복 과제", 0));
         objectives.add(new Objective("강의 반복 과제", 0));
         objectives.add(new Objective("강의 반복 과제", 0));
 
-        assertEquals(3, pomodoro.getObjectives().size());
+        assertEquals(3, pomodoro.objectives().size());
     }
 
     @Test
     void getTasks() {
         Pomodoro pomodoro = new Pomodoro();
 
-        assertNotNull(pomodoro.getTasks());
+        assertNotNull(pomodoro.tasks());
     }
 
     @Test
     void addTasks() {
         Pomodoro pomodoro = new Pomodoro();
 
-        List<Task> tasks = pomodoro.getTasks();
+        List<Task> tasks = pomodoro.tasks();
 
         tasks.add(new Task("강의 반복 과제", false));
 
@@ -56,11 +56,11 @@ class PomodoroTest {
 
         pomodoro.setQuantity(5);
 
-        assertEquals(5, pomodoro.getQuantity());
+        assertEquals(5, pomodoro.quantity());
 
         pomodoro.setQuantity(8);
 
-        assertEquals(8, pomodoro.getQuantity());
+        assertEquals(8, pomodoro.quantity());
     }
 
     @Test

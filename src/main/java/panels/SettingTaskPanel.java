@@ -20,22 +20,27 @@ public class SettingTaskPanel extends JPanel {
 
     private JTextField textField;
     private JPanel inputFieldPanel;
+    private Pomodoro pomodoro;
 
     public SettingTaskPanel(Pomodoro pomodoro) {
-        this.tasks = pomodoro.getTasks();
+        this.pomodoro = pomodoro;
+        this.tasks = pomodoro.tasks();
 
         this.setOpaque(false);
-
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         this.setBorder(new EmptyBorder(20, 0, 0, 0));
 
-        JLabel label = new JLabel("< 할 일 추 가 >");
-        label.setAlignmentX(Component.CENTER_ALIGNMENT);
-        this.add(label);
+        createTitle();
 
         createInputFieldPanel();
 
         createTasksPanel();
+    }
+
+    public void createTitle() {
+        JLabel label = new JLabel("< 할 일 추 가 >");
+        label.setAlignmentX(Component.CENTER_ALIGNMENT);
+        this.add(label);
     }
 
     public void createInputFieldPanel() {
@@ -59,6 +64,7 @@ public class SettingTaskPanel extends JPanel {
 
     public void createAddButton() {
         JButton button = new JButton("추가");
+
         button.addActionListener(event -> {
             String text = textField.getText();
 
@@ -68,10 +74,12 @@ public class SettingTaskPanel extends JPanel {
 
             tasks.add(new Task(text, false));
 
+
             cleatTextField();
 
             tasksPanel.update();
         });
+
         inputFieldPanel.add(button);
     }
 

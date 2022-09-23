@@ -39,7 +39,7 @@ public class PomodoroChecker {
     public void initFrame() {
         frame = new JFrame("Pomodoro");
         frame.setLayout(new BorderLayout());
-        frame.setSize(500, 700);
+        frame.setSize(600, 700);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
