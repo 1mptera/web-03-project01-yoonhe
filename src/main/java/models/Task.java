@@ -22,6 +22,12 @@ public class Task {
         return "작업: " + title + " / 완료 여부: " + completedToString();
     }
 
+    @Override
+    public boolean equals(Object other) {
+        Task otherTask = (Task) other;
+        return title.equals(otherTask.title) && completed == otherTask.completed;
+    }
+
     public void complete() {
         completed = true;
     }

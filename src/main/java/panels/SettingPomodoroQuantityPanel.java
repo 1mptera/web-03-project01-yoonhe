@@ -12,8 +12,7 @@ public class SettingPomodoroQuantityPanel extends JPanel {
     private JPanel comboBoxPanel;
 
     public SettingPomodoroQuantityPanel(
-            Pomodoro pomodoro
-    ) {
+            Pomodoro pomodoro) {
         this.pomodoro = pomodoro;
 
         this.setOpaque(false);
@@ -36,6 +35,8 @@ public class SettingPomodoroQuantityPanel extends JPanel {
         for (int i = 1; i <= 10; i += 1) {
             comboBox.addItem(i);
         }
+
+        comboBox.setSelectedIndex(pomodoro.quantity() - 1);
 
         comboBox.addActionListener(event -> {
             pomodoro.setQuantity((Integer) comboBox.getSelectedItem());

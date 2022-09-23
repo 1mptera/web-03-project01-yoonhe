@@ -9,6 +9,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.StrokeBorder;
+import java.awt.Component;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -22,8 +23,15 @@ public class ReviewListPage extends JPanel {
         this.contentPanel = contentPanel;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setOpaque(false);
 
-        this.add(new JLabel("리뷰"));
+        JPanel panel = new JPanel();
+        panel.setOpaque(false);
+        panel.setBorder(new EmptyBorder(20, 0, 20, 0));
+        this.add(panel);
+        JLabel title = new JLabel("리뷰");
+        panel.add(title);
+        title.setAlignmentX(Component.CENTER_ALIGNMENT);
 
         createReviewListPanel();
     }
@@ -43,20 +51,21 @@ public class ReviewListPage extends JPanel {
             return;
         }
 
-
         List<Review> reviews = sessions.stream()
                 .map(session -> session.review())
                 .collect(Collectors.toList());
 
         for (Review review : reviews) {
             JPanel panel = new JPanel();
-            panel.setBorder(new EmptyBorder(30, 30, 30, 30));
+            panel.setBorder(new EmptyBorder(10, 10, 10, 10));
             panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 
             String[] values = review.values();
 
             for (String value : values) {
-                panel.add(new JLabel(value));
+                JLabel label = new JLabel(value);
+                label.setBorder(new EmptyBorder(5, 0, 5, 0));
+                panel.add(label);
             }
 
             listPanel.add(panel);

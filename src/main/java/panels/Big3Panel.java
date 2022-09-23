@@ -6,17 +6,21 @@ import models.Pomodoro;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-import java.awt.Color;
 import java.awt.Component;
 import java.util.List;
 
 public class Big3Panel extends JPanel {
+    private List<Objective> objectives;
+
     public Big3Panel(Pomodoro pomodoro) {
-        List<Objective> objectives = pomodoro.getObjectives();
+        this.objectives = pomodoro.objectives();
+
+        pomodoro.setObjectives(objectives);
 
         this.setOpaque(false);
+
+        this.setBorder(new EmptyBorder(30, 0, 30, 0));
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
@@ -29,12 +33,6 @@ public class Big3Panel extends JPanel {
         this.add(title);
 
         title.setBorder(new EmptyBorder(0, 0, 20, 0));
-
-        objectives.removeAll(objectives);
-
-        objectives.add(new Objective("강의 반복 과제", 0));
-        objectives.add(new Objective("코딩 도장", 0));
-        objectives.add(new Objective("퀘스트 과제", 0));
 
         for (Objective objective : objectives) {
             JLabel label = new JLabel(objective.toString());
