@@ -7,7 +7,7 @@
 ## 2.  프로젝트 설명 🌄
 
 
-https://user-images.githubusercontent.com/53102889/191897268-14b95b83-3f62-4287-adfd-d7e7351cb771.mov
+- [d](https://user-images.githubusercontent.com/53102889/191897268-14b95b83-3f62-4287-adfd-d7e7351cb771.mov)
 
 
 
