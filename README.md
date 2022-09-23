@@ -6,10 +6,7 @@
 
 ## 2.  프로젝트 설명 🌄
 
-
-- [d](https://user-images.githubusercontent.com/53102889/191897268-14b95b83-3f62-4287-adfd-d7e7351cb771.mov)
-
-
+https://user-images.githubusercontent.com/53102889/191964936-e9c82fd1-cf72-42b3-86c1-644ddaae8d6f.mov
 
 ## 3. **프로젝트 계획 및 회고 🥇**
 - [프로젝트 설계](https://github.com/1mptera/web-03-project01-yoonhe/issues/1)
